@@ -1,0 +1,47 @@
+# EgoGesture Training: MixSTE Encoder + TCN Head
+
+dataset:
+  name: egogesture
+  root: dataset/EgoGesture
+  keypoints_dir: dataset/EgoGesture/keypoints_mediapipe
+  seq_len: 64
+  min_valid_frames: 10
+  min_valid_ratio: 0.30
+  augmentation: true
+
+model:
+  encoder_type: mixste
+  num_hand_joints: 21
+  num_body_joints: 17
+  freeze_encoder: true
+
+gesture:
+  extraction_point: latent
+  freeze_transhands: true
+  use_velocity: true
+  head_type: tcn
+  num_classes: 83
+  feature_dim: 512
+  hidden_dim: 512
+  dropout: 0.6
+  num_layers: 3
+  kernel_size: 3
+  pretrained_checkpoint: experiments/lifting/MixSTE/mixste_stage2b/checkpoint/best.pth
+
+training:
+  batch_size: 32
+  epochs: 70
+  warmup_epochs: 5
+  lr: 0.001
+  weight_decay: 0.05
+  mixup_alpha: 0.2
+  scheduler: warmup_cosine
+  loss:
+    alpha: 1.0
+    gamma: 2.0
+    smoothing: 0.1
+  device: cuda
+
+paths:
+  checkpoint: experiments/gesture/MixSTE/mixste_egogesture/checkpoint
+  plot: experiments/gesture/MixSTE/mixste_egogesture/plot

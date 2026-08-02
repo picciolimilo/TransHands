@@ -1,0 +1,33 @@
+# Baseline Re:InterHand Configuration (ST-GCN)
+# Stage 1: TransHands Training on Re:InterHand with Frozen Encoder
+
+dataset:
+  name: reinterhand
+  root: dataset/ReInterHand
+  use_2d: true
+  seq_len: 64          
+  stride: 10
+  min_valid_frames: 40  
+  augmentation: true
+  subset_train: null    
+  subset_val: null
+
+model:
+  encoder_type: stgcn
+  num_hand_joints: 21
+  num_body_joints: 18
+  freeze_encoder: true
+  weights_path: external/st-gcn/checkpoint/pretrain/st_gcn.kinetics.pt
+
+training:
+  batch_size: 16
+  epochs: 100
+  warmup_epochs: 5
+  lr: 0.0001
+  weight_decay: 0.01
+  device: cuda
+  mmm_weight: 0.25
+
+paths:
+  checkpoint: experiments/lifting/STGCN/stgcn_stage1/checkpoint
+  plot: experiments/lifting/STGCN/stgcn_stage1/plot

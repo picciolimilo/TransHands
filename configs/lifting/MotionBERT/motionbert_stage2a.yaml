@@ -1,0 +1,35 @@
+# Baseline Re:InterHand Configuration (MotionBERT)
+# Stage 2-A: TransHands Training on Re:InterHand with Unfrozen Encoder
+
+dataset:
+  name: reinterhand
+  root: dataset/ReInterHand
+  use_2d: true
+  seq_len: 150
+  stride: 10  
+  min_valid_frames:  75
+  augmentation: true
+
+model:
+  encoder_type: motionbert
+  num_hand_joints: 21
+  num_body_joints: 17
+  freeze_encoder: false
+  weights_path: external/MotionBERT/checkpoint/pretrain/best_epoch.bin
+
+training:
+  batch_size: 8
+  epochs: 80
+  warmup_epochs:  10
+
+  lr_backbone: 0.000005      # 5e-6 
+  lr: 0.00005                # 5e-5 
+
+  weight_decay: 0.01
+  device: cuda
+  mmm_weight: 0.0
+
+
+paths: 
+  checkpoint: experiments/lifting/MotionBERT/motionbert_stage2a/checkpoint
+  plot: experiments/lifting/MotionBERT/motionbert_stage2a/plot

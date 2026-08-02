@@ -1,0 +1,42 @@
+# Baseline Re:InterHand Configuration (MixSTE)
+# Stage 2-B: TransHands Training on AssemblyHands + GigaHands with Unfrozen Encoder
+
+dataset:
+  name: multi
+  datasets:
+    - name: assemblyhands
+      root: dataset/AssemblyHands
+      weight: 2.0
+    - name: gigahands
+      root: dataset/GigaHands
+      weight: 1.0
+  use_2d: true
+  seq_len: 243          
+  stride: 10
+  min_valid_frames: 75  
+  augmentation: true
+
+model:
+  encoder_type: mixste
+  num_hand_joints: 21
+  num_body_joints: 17
+  freeze_encoder: false
+  weights_path: external/MixSTE/checkpoint/pretrain/best_epoch_cpn_243f.bin
+
+training:
+  batch_size: 8
+  epochs: 80
+  warmup_epochs:  10
+
+  epoch_size: 40000          # Number of view samples per epoch
+
+  lr_backbone: 0.000005      # 5e-6 
+  lr: 0.00005                # 5e-5 
+
+  weight_decay: 0.01
+  device: cuda
+  mmm_weight:  0.0
+
+paths:
+  checkpoint: experiments/lifting/MixSTE/mixste_stage2b/checkpoint
+  plot: experiments/lifting/MixSTE/mixste_stage2b/plot

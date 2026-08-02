@@ -1,0 +1,31 @@
+# Baseline Re:InterHand Configuration (MixSTE)
+# Stage 1: TransHands Training on Re:InterHand with Frozen Encoder
+
+dataset:
+  name: reinterhand
+  root: dataset/ReInterHand
+  use_2d: true
+  seq_len: 243          
+  stride: 10
+  min_valid_frames: 75  
+  augmentation: true
+
+model:
+  encoder_type: mixste
+  num_hand_joints: 21
+  num_body_joints: 17
+  freeze_encoder: true
+  weights_path: external/MixSTE/checkpoint/pretrain/best_epoch_cpn_243f.bin
+
+training:
+  batch_size: 16
+  epochs: 100
+  warmup_epochs: 5
+  lr: 0.0001
+  weight_decay: 0.01
+  device: cuda
+  mmm_weight: 0.25
+
+paths:
+  checkpoint: experiments/lifting/MixSTE/mixste_stage1/checkpoint
+  plot: experiments/lifting/MixSTE/mixste_stage1/plot

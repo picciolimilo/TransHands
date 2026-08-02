@@ -1,0 +1,44 @@
+# Baseline Re:InterHand Configuration (PoseFormerV2)
+# Stage 2-B: TransHands Training on Re:InterHand + AssemblyHands + GigaHands with Unfrozen Encoder
+
+dataset:
+  name: multi
+  datasets:
+    - name: assemblyhands
+      root: dataset/AssemblyHands
+      weight: 2.0
+    - name: gigahands
+      root: dataset/GigaHands
+      weight: 1.0
+  use_2d: true
+  seq_len: 64          
+  stride: 10
+  min_valid_frames: 40  
+  augmentation: true
+  subset_train: null    
+  subset_val: null
+
+model:
+  encoder_type: stgcn
+  num_hand_joints: 21
+  num_body_joints: 18
+  freeze_encoder: false
+  weights_path: external/st-gcn/checkpoint/pretrain/st_gcn.kinetics.pt
+
+training:
+  batch_size: 8
+  epochs: 80
+  warmup_epochs:  10
+
+  epoch_size: 40000          # Number of view samples per epoch
+
+  lr_backbone: 0.000005      # 5e-6 
+  lr: 0.00005                # 5e-5 
+
+  weight_decay: 0.01
+  device: cuda
+  mmm_weight:  0.0
+
+paths:
+  checkpoint: experiments/lifting/STGCN/stgcn_stage2b/checkpoint
+  plot: experiments/lifting/STGCN/stgcn_stage2b/plot
