@@ -1,10 +1,14 @@
 # TransHands: Repurposing Human Pose Encoders as Hand Pose Encoders.
 
+[![arXiv](https://img.shields.io/badge/arXiv-2608.22341-b31b1b.svg)](https://arxiv.org/abs/2608.22341)
+
 OFFICIAL IMPLEMENTATION of the paper **TransHands: Repurposing Human Pose Encoders as Hand Pose Encoders**.
 
 > **Abstract:** Lifting 3D hand poses from 2D monocular representations remains challenging due to the limited availability of large-scale, diverse 3D-annotated hand datasets, in contrast to the abundance of human body motion data. We address this limitation by transferring motion representations learned from large body pose corpora to the hand domain.
-We introduce **TransHands**, a backbone-agnostic transfer learning framework that enables pre-trained human motion encoders to be effectively adapted for 3D hand pose estimation from 2D pose inputs. Rather than training hand-specific biomechanical models from scratch, TransHands combines a two-stage training and fine-tuning strategy with a lightweight hand-specific input adaptation module that aligns hand kinematics with the representation space learned for full-body motion.
-We evaluate TransHands across four state-of-the-art motion modeling architectures, including transformer-based, graph-based, and frequency-domain models. Results demonstrate that motion priors learned from body pose data transfer consistently across architectures, yielding consistent accuracy gains, strong cross-domain generalization, particularly in challenging egocentric settings, and applicability for downstream tasks in real-world contexts.
+>
+> We introduce **TransHands**, a backbone-agnostic transfer learning framework that enables pre-trained human motion encoders to be effectively adapted for 3D hand pose estimation from 2D pose inputs. Rather than training hand-specific biomechanical models from scratch, TransHands combines a two-stage training and fine-tuning strategy with a lightweight hand-specific input adaptation module that aligns hand kinematics with the representation space learned for full-body motion.
+>
+> We evaluate TransHands across four state-of-the-art motion modeling architectures, including transformer-based, graph-based, and frequency-domain models. Results demonstrate that motion priors learned from body pose data transfer consistently across architectures, yielding consistent accuracy gains, strong cross-domain generalization, particularly in challenging egocentric settings, and applicability for downstream tasks in real-world contexts.
 
 ## Architecture
 <img src="docs/img/architecture.png" width="600"/>
@@ -159,4 +163,22 @@ lifting/
         ├── motionbert_stage1.yaml
         ├── motionbert_stage2a.yaml
         └── motionbert_stage2b.yaml
+```
+
+## Citation
+
+If you find this work useful for your research, or if you use TransHands or any part of this code in your own project, please cite our paper:
+
+> Milo Piccioli, Gianluca Amprimo, Claudia Ferraris, and Gabriella Olmo.
+> *TransHands: Repurposing Human Pose Encoders as Hand Pose Encoders.*
+> arXiv preprint arXiv:2608.22341, 2026.
+
+```bibtex
+@misc{transhands2026,
+      title={TransHands: Repurposing Human Pose Encoders as Hand Pose Encoders}, 
+      author={Milo Piccioli and Gianluca Amprimo and Claudia Ferraris and Gabriella Olmo},
+      year={2026},
+      howpublished={arXiv:2608.22341},
+      url={https://arxiv.org/abs/2608.22341}, 
+}
 ```
